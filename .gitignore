@@ -1,0 +1,7 @@
+# Игнорируем директорию в любой директории проекта
+node_modules/
+
+# Игнорируем файл в любой директории проекта
+.eslintrc.js
+package-lock.json
+package.json
