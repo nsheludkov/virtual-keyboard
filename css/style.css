@@ -20,6 +20,10 @@
   color: #444444
 }
 
+.hidden {
+  display: none
+}
+
 .keyboard {
   width: 704px;
   margin: 0 auto;
@@ -53,3 +57,13 @@
   user-select: none;
   transition: border-radius 0.3s, background-color 0.3s
 }
+
+.keyboard .key:hover {
+  background: #79aa89
+}
+
+.keyboard .key.active {
+  background-color: #2cfd72;
+  border-radius: 50px
+}
+
