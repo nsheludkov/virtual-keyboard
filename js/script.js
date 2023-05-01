@@ -6,6 +6,8 @@ let lang = 'eng';
 let caps = false;
 let leftShift = false;
 let rightShift = false;
+let AltLeft = false;
+let ControlLeft = false;
 let cursor = 0;
 //
 function createAndFillRow(keyboard, arrayOfElements) {
@@ -27,24 +29,18 @@ function createAndFillRow(keyboard, arrayOfElements) {
     ruSpan.classList.add('rus');
     ruSpan.innerHTML = `${el.rus}`;
     newKey.append(ruSpan);
+
+    const enShiftSpan = document.createElement('span');
+    enShiftSpan.classList.add('shiftEng');
+    enShiftSpan.innerHTML = `${el.shiftEng}`;
+    newKey.append(enShiftSpan);
+
+    const ruShiftSpan = document.createElement('span');
+    ruShiftSpan.classList.add('shiftRus');
+    ruShiftSpan.innerHTML = `${el.shiftRus}`;
+    newKey.append(ruShiftSpan);
   });
 }
-
-// Local storage fuctions
-function setLocalStorage() {
-  localStorage.setItem('lang', lang);
-}
-
-function getLocalStorage() {
-  if (localStorage.getItem('lang')) {
-    if (localStorage.getItem('lang') !== undefined) {
-      lang = localStorage.getItem('lang');
-    }
-  }
-}
-
-window.addEventListener('beforeunload', setLocalStorage);
-window.addEventListener('load', getLocalStorage);
 
 // Add html elemets
 const wrapper = document.createElement('div');
@@ -76,24 +72,189 @@ createAndFillRow(keyboard, keys.slice(55, 64));
 function updateKeys() {
   const rusSpans = document.querySelectorAll('.rus');
   const engSpans = document.querySelectorAll('.eng');
+  const rusShiftSpans = document.querySelectorAll('.shiftRus');
+  const engShiftSpans = document.querySelectorAll('.shiftEng');
   if (lang === 'rus') {
-    engSpans.forEach((el) => {
-      el.classList.add('hidden');
-    });
-    rusSpans.forEach((el) => {
-      el.classList.remove('hidden');
-    });
-  } else {
-    rusSpans.forEach((el) => {
-      el.classList.add('hidden');
-    });
-    engSpans.forEach((el) => {
-      el.classList.remove('hidden');
-    });
+    if (caps === true) {
+      if (leftShift === true || rightShift === true) {
+        // Its lower case rus lang, hide all spans exept rus lower case
+        rusSpans.forEach((el) => {
+          el.classList.remove('hidden');
+        });
+        engSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        rusShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+      } else {
+        // Its upper case rus lang, hide all spans exept rus upper case
+        rusSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        rusShiftSpans.forEach((el) => {
+          el.classList.remove('hidden');
+        });
+        engShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+      }
+    } else if (leftShift === true || rightShift === true) {
+      // Its upper case rus lang, hide all spans exept rus upper case
+      rusSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      rusShiftSpans.forEach((el) => {
+        el.classList.remove('hidden');
+      });
+      engShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+    } else {
+    // Its lower case rus lang, hide all spans exept rus lower case
+      rusSpans.forEach((el) => {
+        el.classList.remove('hidden');
+      });
+      engSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      rusShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+    }
+  } else if (lang === 'eng') {
+    // eng lang
+    if (caps === true) {
+      if (leftShift === true || rightShift === true) {
+      // Its lower case eng lang, hide all spans exept eng lower case
+        rusSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engSpans.forEach((el) => {
+          el.classList.remove('hidden');
+        });
+        rusShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+      } else {
+      // Its upper case eng lang, hide all spans exept eng upper case
+        rusSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        rusShiftSpans.forEach((el) => {
+          el.classList.add('hidden');
+        });
+        engShiftSpans.forEach((el) => {
+          el.classList.remove('hidden');
+        });
+      }
+    } else if (leftShift === true || rightShift === true) {
+    // Its upper case eng lang, hide all spans exept eng upper case
+      rusSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      rusShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engShiftSpans.forEach((el) => {
+        el.classList.remove('hidden');
+      });
+    } else {
+      // Its lower case eng lang, hide all spans exept eng lower case
+      rusSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engSpans.forEach((el) => {
+        el.classList.remove('hidden');
+      });
+      rusShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+      engShiftSpans.forEach((el) => {
+        el.classList.add('hidden');
+      });
+    }
   }
 }
 
-updateKeys();
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'AltLeft') {
+    AltLeft = true;
+  } else if (e.code === 'ControlLeft') {
+    ControlLeft = true;
+  } else if (e.code === 'ShiftLeft') {
+    leftShift = true;
+    updateKeys();
+  } else if (e.code === 'ShiftRight') {
+    rightShift = true;
+    updateKeys();
+  }
+});
+
+window.addEventListener('keyup', (e) => {
+  if (e.code === 'AltLeft') {
+    AltLeft = false;
+  } else if (e.code === 'ControlLeft') {
+    ControlLeft = false;
+  } else if (e.code === 'ShiftLeft') {
+    leftShift = false;
+    updateKeys();
+  } else if (e.code === 'ShiftRight') {
+    rightShift = false;
+    updateKeys();
+  } else if (e.code === 'CapsLock') {
+    caps = caps !== true;
+    updateKeys();
+  }
+});
+
+// Language change
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'AltLeft' || e.code === 'ControlLeft') {
+    if (AltLeft === true && ControlLeft === true) {
+      lang = (lang === 'rus') ? 'eng' : 'rus';
+      updateKeys();
+    }
+  }
+});
+
+// Local storage fuctions
+function setLocalStorage() {
+  localStorage.setItem('lang', lang);
+}
+
+function getLocalStorage() {
+  if (localStorage.getItem('lang')) {
+    if (localStorage.getItem('lang') !== undefined) {
+      lang = localStorage.getItem('lang');
+      updateKeys();
+    }
+  }
+}
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
 
 function isUpperCase() {
   let isSymbolUpperCase = false;
@@ -127,6 +288,7 @@ function returnSymbolByKeycode(code) {
   return symb;
 }
 
+// keyboard input
 window.addEventListener('keydown', (e) => {
   e.preventDefault();
   cursor = textarea.selectionStart;
