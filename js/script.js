@@ -18,6 +18,7 @@ function createAndFillRow(keyboard, arrayOfElements) {
   arrayOfElements.forEach((el) => {
     const newKey = document.createElement('div');
     newKey.classList.add('key', `${el.name}`);
+    newKey.id = `${el.name}`;
     currRow.append(newKey);
 
     const enSpan = document.createElement('span');
@@ -239,13 +240,39 @@ window.addEventListener('keyup', (e) => {
   }
 });
 
-// дабавление классов при нажатии клавиш
+// Active keys classes
 document.addEventListener('keydown', (e) => {
+  if (document.querySelector(`.${e.code}`) === null) {
+    return;
+  }
   document.querySelector(`.${e.code}`).classList.add('active');
 });
 
 document.addEventListener('keyup', (e) => {
+  if (document.querySelector(`.${e.code}`) === null) {
+    return;
+  }
   document.querySelector(`.${e.code}`).classList.remove('active');
+});
+
+document.addEventListener('mousedown', (e) => {
+  if (e.target.id === '') {
+    return;
+  }
+  if (document.querySelector(`.${e.target.id}`) === null) {
+    return;
+  }
+  document.querySelector(`.${e.target.id}`).classList.add('active');
+});
+
+document.addEventListener('mouseup', (e) => {
+  if (e.target.id === '') {
+    return;
+  }
+  if (document.querySelector(`.${e.target.id}`) === null) {
+    return;
+  }
+  document.querySelector(`.${e.target.id}`).classList.remove('active');
 });
 
 // Language change
@@ -340,6 +367,57 @@ window.addEventListener('keydown', (e) => {
     textarea.setSelectionRange(cursor, cursor);
     textarea.focus();
   } else if (e.code === 'Delete') {
+    newTextarea = `${oldTextarea.slice(0, cursor)}${oldTextarea.slice(cursor + 1)}`;
+    textarea.value = newTextarea;
+    textarea.setSelectionRange(cursor, cursor);
+    textarea.focus();
+  } else {
+    newTextarea = `${oldTextarea.slice(0, cursor)}${keySymbol}${oldTextarea.slice(cursor)}`;
+    textarea.value = newTextarea;
+    cursor += 1;
+    textarea.setSelectionRange(cursor, cursor);
+    textarea.focus();
+  }
+});
+
+// mouse input
+window.addEventListener('click', (e) => {
+  if (e.target.id === '') {
+    return;
+  }
+  if (document.querySelector(`.${e.target.id}`) === null) {
+    return;
+  }
+  cursor = textarea.selectionStart;
+  const oldTextarea = textarea.value;
+  let newTextarea = '';
+  const keySymbol = returnSymbolByKeycode(e.target.id);
+  if (keySymbol.indexOf('Alt') >= 0 || keySymbol.indexOf('Ctrl') >= 0 || keySymbol.indexOf('Shift') >= 0
+   || keySymbol.indexOf('Win') >= 0 || keySymbol.indexOf('Caps') >= 0) {
+    return;
+  }
+  if (keySymbol === 'Enter') {
+    const enter = '\n';
+    newTextarea = `${oldTextarea.slice(0, cursor)}${enter}${oldTextarea.slice(cursor)}`;
+    textarea.value = newTextarea;
+    cursor += 1;
+    textarea.setSelectionRange(cursor, cursor);
+    textarea.focus();
+  } else if (keySymbol === 'Tab') {
+    const tab = '    ';
+    newTextarea = `${oldTextarea.slice(0, cursor)}${tab}${oldTextarea.slice(cursor)}`;
+    textarea.value = newTextarea;
+    textarea.setSelectionRange(cursor, cursor);
+    textarea.focus();
+  } else if (e.target.id === 'Backspace') {
+    if (cursor !== 0) {
+      newTextarea = `${oldTextarea.slice(0, cursor - 1)}${oldTextarea.slice(cursor)}`;
+    }
+    textarea.value = newTextarea;
+    cursor -= 1;
+    textarea.setSelectionRange(cursor, cursor);
+    textarea.focus();
+  } else if (e.target.id === 'Delete') {
     newTextarea = `${oldTextarea.slice(0, cursor)}${oldTextarea.slice(cursor + 1)}`;
     textarea.value = newTextarea;
     textarea.setSelectionRange(cursor, cursor);
