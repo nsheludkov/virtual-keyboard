@@ -4,34 +4,34 @@ const keys = [
     eng: '`', shiftEng: '~', rus: 'ё', shiftRus: 'Ё', name: 'Backquote',
   },
   {
-    eng: '1', shiftEng: '1', rus: '1', shiftRus: '1', name: 'Digit1',
+    eng: '1', shiftEng: '!', rus: '1', shiftRus: '!', name: 'Digit1',
   },
   {
-    eng: '2', shiftEng: '2', rus: '2', shiftRus: '2', name: 'Digit2',
+    eng: '2', shiftEng: '@', rus: '2', shiftRus: '"', name: 'Digit2',
   },
   {
-    eng: '3', shiftEng: '3', rus: '3', shiftRus: '3', name: 'Digit3',
+    eng: '3', shiftEng: '#', rus: '3', shiftRus: '№', name: 'Digit3',
   },
   {
-    eng: '4', shiftEng: '4', rus: '4', shiftRus: '4', name: 'Digit4',
+    eng: '4', shiftEng: '$', rus: '4', shiftRus: ';', name: 'Digit4',
   },
   {
-    eng: '5', shiftEng: '5', rus: '5', shiftRus: '5', name: 'Digit5',
+    eng: '5', shiftEng: '%', rus: '5', shiftRus: '%', name: 'Digit5',
   },
   {
-    eng: '6', shiftEng: '6', rus: '6', shiftRus: '6', name: 'Digit6',
+    eng: '6', shiftEng: '^', rus: '6', shiftRus: ':', name: 'Digit6',
   },
   {
-    eng: '7', shiftEng: '7', rus: '7', shiftRus: '7', name: 'Digit7',
+    eng: '7', shiftEng: '&', rus: '7', shiftRus: '?', name: 'Digit7',
   },
   {
-    eng: '8', shiftEng: '8', rus: '8', shiftRus: '8', name: 'Digit8',
+    eng: '8', shiftEng: '*', rus: '8', shiftRus: '*', name: 'Digit8',
   },
   {
-    eng: '9', shiftEng: '9', rus: '9', shiftRus: '9', name: 'Digit9',
+    eng: '9', shiftEng: '(', rus: '9', shiftRus: '(', name: 'Digit9',
   },
   {
-    eng: '0', shiftEng: '0', rus: '0', shiftRus: '0', name: 'Digit0',
+    eng: '0', shiftEng: ')', rus: '0', shiftRus: ')', name: 'Digit0',
   },
   {
     eng: '-', shiftEng: '_', rus: '-', shiftRus: '_', name: 'Minus',
@@ -79,7 +79,7 @@ const keys = [
     eng: '[', shiftEng: '{', rus: 'х', shiftRus: 'Х', name: 'BracketLeft',
   },
   {
-    eng: ']', shiftEng: '}', rus: 'ъ', shiftRus: 'Ъ', name: 'BracketRigth',
+    eng: ']', shiftEng: '}', rus: 'ъ', shiftRus: 'Ъ', name: 'BracketRight',
   },
   {
     eng: '\\', shiftEng: '|', rus: '\\', shiftRus: '/', name: 'Backslash',
@@ -166,7 +166,7 @@ const keys = [
     eng: 'Shift', shiftEng: 'Shift', rus: 'Shift', shiftRus: 'Shift', name: 'ShiftRight',
   },
   {
-    eng: 'Ctrl', shiftEng: 'Ctrl', rus: 'Ctrl', shiftRus: 'Ctrl', name: 'CtrlLeft',
+    eng: 'Ctrl', shiftEng: 'Ctrl', rus: 'Ctrl', shiftRus: 'Ctrl', name: 'ControlLeft',
   },
   {
     eng: 'Win', shiftEng: 'Win', rus: 'Win', shiftRus: 'Win', name: 'MetaLeft',
@@ -190,7 +190,7 @@ const keys = [
     eng: '▶', shiftEng: '▶', rus: '▶', shiftRus: '▶', name: 'ArrowRight',
   },
   {
-    eng: 'Ctrl', shiftEng: 'Ctrl', rus: 'Ctrl', shiftRus: 'Ctrl', name: 'CtrlRight',
+    eng: 'Ctrl', shiftEng: 'Ctrl', rus: 'Ctrl', shiftRus: 'Ctrl', name: 'ControlRight',
   },
 ];
 

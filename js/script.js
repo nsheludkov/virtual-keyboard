@@ -68,6 +68,16 @@ createAndFillRow(keyboard, keys.slice(29, 42));
 createAndFillRow(keyboard, keys.slice(42, 55));
 createAndFillRow(keyboard, keys.slice(55, 64));
 
+const descriptionWin = document.createElement('p');
+descriptionWin.classList.add('description');
+descriptionWin.innerHTML = 'Created at Windows OS.';
+wrapper.append(descriptionWin);
+
+const descriptionLang = document.createElement('p');
+descriptionLang.classList.add('description');
+descriptionLang.innerHTML = 'Press CtrlLeft + AltLeft to change language.';
+wrapper.append(descriptionLang);
+
 // Change keys in accordance with language and Shift
 function updateKeys() {
   const rusSpans = document.querySelectorAll('.rus');
@@ -227,6 +237,15 @@ window.addEventListener('keyup', (e) => {
     caps = caps !== true;
     updateKeys();
   }
+});
+
+// дабавление классов при нажатии клавиш
+document.addEventListener('keydown', (e) => {
+  document.querySelector(`.${e.code}`).classList.add('active');
+});
+
+document.addEventListener('keyup', (e) => {
+  document.querySelector(`.${e.code}`).classList.remove('active');
 });
 
 // Language change
