@@ -18,27 +18,31 @@ function createAndFillRow(keyboard, arrayOfElements) {
   arrayOfElements.forEach((el) => {
     const newKey = document.createElement('div');
     newKey.classList.add('key', `${el.name}`);
-    newKey.id = `${el.name}`;
+    newKey.id = `${el.name}0`;
     currRow.append(newKey);
 
     const enSpan = document.createElement('span');
     enSpan.classList.add('eng');
     enSpan.innerHTML = `${el.eng}`;
+    enSpan.id = `${el.name}1`;
     newKey.append(enSpan);
 
     const ruSpan = document.createElement('span');
     ruSpan.classList.add('rus');
     ruSpan.innerHTML = `${el.rus}`;
+    ruSpan.id = `${el.name}2`;
     newKey.append(ruSpan);
 
     const enShiftSpan = document.createElement('span');
     enShiftSpan.classList.add('shiftEng');
     enShiftSpan.innerHTML = `${el.shiftEng}`;
+    enShiftSpan.id = `${el.name}3`;
     newKey.append(enShiftSpan);
 
     const ruShiftSpan = document.createElement('span');
     ruShiftSpan.classList.add('shiftRus');
     ruShiftSpan.innerHTML = `${el.shiftRus}`;
+    ruShiftSpan.id = `${el.name}4`;
     newKey.append(ruShiftSpan);
   });
 }
@@ -259,20 +263,20 @@ document.addEventListener('mousedown', (e) => {
   if (e.target.id === '') {
     return;
   }
-  if (document.querySelector(`.${e.target.id}`) === null) {
+  if (document.querySelector(`.${e.target.id.substring(0, e.target.id.length - 1)}`) === null) {
     return;
   }
-  document.querySelector(`.${e.target.id}`).classList.add('active');
+  document.querySelector(`.${e.target.id.substring(0, e.target.id.length - 1)}`).classList.add('active');
 });
 
 document.addEventListener('mouseup', (e) => {
   if (e.target.id === '') {
     return;
   }
-  if (document.querySelector(`.${e.target.id}`) === null) {
+  if (document.querySelector(`.${e.target.id.substring(0, e.target.id.length - 1)}`) === null) {
     return;
   }
-  document.querySelector(`.${e.target.id}`).classList.remove('active');
+  document.querySelector(`.${e.target.id.substring(0, e.target.id.length - 1)}`).classList.remove('active');
 });
 
 // Language change
@@ -385,13 +389,13 @@ window.addEventListener('click', (e) => {
   if (e.target.id === '') {
     return;
   }
-  if (document.querySelector(`.${e.target.id}`) === null) {
+  if (document.querySelector(`.${e.target.id.substring(0, e.target.id.length - 1)}`) === null) {
     return;
   }
   cursor = textarea.selectionStart;
   const oldTextarea = textarea.value;
   let newTextarea = '';
-  const keySymbol = returnSymbolByKeycode(e.target.id);
+  const keySymbol = returnSymbolByKeycode(e.target.id.substring(0, e.target.id.length - 1));
   if (keySymbol.indexOf('Alt') >= 0 || keySymbol.indexOf('Ctrl') >= 0 || keySymbol.indexOf('Shift') >= 0
    || keySymbol.indexOf('Win') >= 0 || keySymbol.indexOf('Caps') >= 0) {
     return;
@@ -409,7 +413,7 @@ window.addEventListener('click', (e) => {
     textarea.value = newTextarea;
     textarea.setSelectionRange(cursor, cursor);
     textarea.focus();
-  } else if (e.target.id === 'Backspace') {
+  } else if (e.target.id.substring(0, e.target.id.length - 1) === 'Backspace') {
     if (cursor !== 0) {
       newTextarea = `${oldTextarea.slice(0, cursor - 1)}${oldTextarea.slice(cursor)}`;
     }
@@ -417,7 +421,7 @@ window.addEventListener('click', (e) => {
     cursor -= 1;
     textarea.setSelectionRange(cursor, cursor);
     textarea.focus();
-  } else if (e.target.id === 'Delete') {
+  } else if (e.target.id.substring(0, e.target.id.length - 1) === 'Delete') {
     newTextarea = `${oldTextarea.slice(0, cursor)}${oldTextarea.slice(cursor + 1)}`;
     textarea.value = newTextarea;
     textarea.setSelectionRange(cursor, cursor);
