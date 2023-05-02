@@ -297,10 +297,10 @@ function setLocalStorage() {
 function getLocalStorage() {
   if (localStorage.getItem('lang')) {
     if (localStorage.getItem('lang') !== undefined) {
-      lang = localStorage.getItem('lang');
-      updateKeys();
+      lang = (localStorage.getItem('lang') === 'rus') ? 'rus' : 'eng';
     }
   }
+  updateKeys();
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
